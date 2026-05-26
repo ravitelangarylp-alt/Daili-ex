@@ -3,17 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>ಪ್ರಕೃತಿ ಸ್ಪರ್ಶ - ನನ್ನ ಹಣಕಾಸು ಕಾವಲು</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <title>ಪ್ರಕೃತಿ ಹಣಕಾಸು - ಸಾಲ & ವಾಪಸಾತಿ ಸಹಿತ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body {
-            /* ನೈಸರ್ಗಿಕ ಚಿತ್ರ - ಶಾಂತ ಕಾಡಿನ ಹಾದಿ (Pexels free) */
             background-image: url('https://images.pexels.com/photos/957024/forest-trees-perspective-bright-957024.jpeg?auto=compress&cs=tinysrgb&w=1600');
             background-size: cover;
             background-position: center center;
@@ -23,7 +17,6 @@
             min-height: 100vh;
             padding: 24px 16px;
         }
-        /* ಅರೆಪಾರದರ್ಶಕ ಡಾರ್ಕ್ ಓವರ್ಲೇ - ಅಕ್ಷರಗಳು ಸ್ಪಷ್ಟವಾಗಲು */
         body::before {
             content: "";
             position: fixed;
@@ -31,92 +24,74 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(30, 40, 25, 0.45); /* ಮೃದು ಹಸಿರು-ಕಂದು ಮಿಶ್ರಿತ */
+            background: rgba(30, 40, 25, 0.45);
             backdrop-filter: blur(2px);
             z-index: 0;
         }
         .main-card {
             position: relative;
             z-index: 2;
-            max-width: 800px;
+            max-width: 850px;
             margin: 0 auto;
-            background: rgba(255, 250, 240, 0.88); /* ತಿಳಿ ಕೆನೆ ಬಣ್ಣ */
+            background: rgba(255, 250, 240, 0.88);
             backdrop-filter: blur(8px);
             border-radius: 48px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(210, 180, 140, 0.3);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.25);
             padding: 24px 28px 36px;
-            transition: all 0.3s;
         }
-        h1 {
-            font-size: 1.9rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #1f4f2b, #2c6e3f);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            margin-bottom: 8px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
-        }
-        .subhead {
-            color: #2b5e2a;
-            border-left: 4px solid #5b8c5a;
-            padding-left: 14px;
-            margin-bottom: 24px;
-            font-weight: 500;
-            font-size: 0.9rem;
-            background: rgba(255,255,220,0.4);
-            border-radius: 20px;
-        }
+        h1 { font-size: 1.9rem; font-weight: 700; background: linear-gradient(135deg, #1f4f2b, #2c6e3f); background-clip: text; -webkit-background-clip: text; color: transparent; margin-bottom: 8px; }
+        .subhead { color: #2b5e2a; border-left: 4px solid #5b8c5a; padding-left: 14px; margin-bottom: 24px; font-weight: 500; font-size: 0.9rem; background: rgba(255,255,220,0.4); border-radius: 20px; }
         .month-selector { background: #e9f3e6cc; border-radius: 60px; padding: 8px 16px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; flex-wrap: wrap; gap: 10px; backdrop-filter: blur(4px); }
         .month-nav { display: flex; gap: 12px; align-items: center; }
-        .month-nav button { background: #568f56; padding: 8px 14px; border-radius: 40px; font-size: 0.9rem; width: auto; border: none; color: white; cursor: pointer; transition: 0.2s; }
-        .month-nav button:hover { background: #2e6730; }
-        #monthDisplay { font-weight: 700; background: white; padding: 6px 18px; border-radius: 40px; }
-        .income-card { background: #e9f3e6cc; backdrop-filter: blur(4px); border-radius: 32px; padding: 18px 20px; margin-bottom: 28px; }
+        .month-nav button, #goToCurrentBtn { background: #568f56; padding: 8px 14px; border-radius: 40px; font-size: 0.9rem; border: none; color: white; cursor: pointer; transition: 0.2s; }
+        .income-card, .loan-card, .expense-card { background: #e9f3e6cc; backdrop-filter: blur(4px); border-radius: 32px; padding: 18px 20px; margin-bottom: 28px; }
         .income-stats { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 18px; }
         .stat-badge { background: white; border-radius: 40px; padding: 8px 18px; font-weight: 600; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
         .savings { background: #fef7e0; border-left: 5px solid #f5b042; }
-        .form-grid { display: flex; flex-direction: column; gap: 16px; margin: 20px 0; }
-        .input-group { display: flex; flex-direction: column; gap: 6px; }
+        .loan-stats { background: #fff3e0; border-radius: 40px; padding: 8px 18px; margin-bottom: 12px; font-weight: 600; display: inline-block; }
+        .loan-substats { display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 15px; }
+        .input-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
         .input-group label { font-weight: 600; font-size: 0.8rem; color: #1c441e; }
         input, select, datalist { padding: 12px 16px; border-radius: 60px; border: 1px solid #cbdcc6; background: rgba(255,255,245,0.95); font-size: 0.95rem; width: 100%; }
-        input:focus { outline: none; border-color: #2e8b57; box-shadow: 0 0 0 2px rgba(46,139,86,0.2); }
         button { background: #3b7a3a; border: none; padding: 12px; border-radius: 60px; font-weight: 700; color: white; font-size: 1rem; cursor: pointer; transition: 0.2s; }
         button:hover { background: #2b5e2a; transform: scale(0.98); }
+        .small-btn { padding: 6px 12px; font-size: 0.8rem; width: auto; }
         .cat-flex { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
-        .cat-flex input { flex: 2; }
-        .cat-flex button { width: auto; padding: 12px 18px; background: #6f9e6d; }
-        .section-title { font-size: 1.3rem; font-weight: 700; margin: 28px 0 12px 0; padding-left: 14px; border-left: 6px solid #558b2f; text-shadow: 0 1px 1px rgba(255,255,200,0.5); }
-        .transaction-item { background: rgba(255,255,240,0.95); border-radius: 28px; padding: 14px 18px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; box-shadow: 0 2px 6px rgba(0,0,0,0.08); transition: 0.1s; }
-        .txn-left .txn-desc { font-weight: 700; color: #1e3a1e; }
-        .txn-meta { font-size: 0.7rem; color: #5f7e5a; display: flex; gap: 12px; margin-top: 5px; }
-        .txn-amount { font-weight: 800; font-size: 1.2rem; }
-        .delete-btn { background: none; border: none; font-size: 1.3rem; cursor: pointer; color: #cb6e6e; padding: 5px 10px; }
-        .danger-text { color: #c7362b !important; }
+        .section-title { font-size: 1.3rem; font-weight: 700; margin: 28px 0 12px 0; padding-left: 14px; border-left: 6px solid #558b2f; }
+        .transaction-item, .loan-item { background: rgba(255,255,240,0.95); border-radius: 28px; padding: 14px 18px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+        .loan-details { flex: 1; }
+        .loan-person { font-weight: 700; color: #1e3a1e; }
+        .loan-meta { font-size: 0.7rem; color: #5f7e5a; margin-top: 4px; }
+        .loan-amount { font-weight: 800; font-size: 1.1rem; }
+        .repayment-history { font-size: 0.7rem; color: #2c6e2c; margin-top: 6px; }
+        .delete-btn, .repay-btn { background: none; border: none; font-size: 1.1rem; cursor: pointer; padding: 5px 8px; border-radius: 30px; }
+        .repay-btn { background: #4c9f4a20; color: #2b6e3c; }
+        .delete-btn { color: #cb6e6e; }
         .progress-bar { background: #cfdec9; border-radius: 30px; height: 10px; margin: 10px 0; }
         .progress-fill { background: #4c9f4a; height: 100%; border-radius: 30px; width: 0%; }
         .month-summary-list { background: rgba(244,249,240,0.9); backdrop-filter: blur(4px); border-radius: 28px; padding: 12px; margin-top: 16px; max-height: 250px; overflow-y: auto; }
         .month-summary-item { display: flex; justify-content: space-between; padding: 10px; border-bottom: 1px solid #cbe5c4; cursor: pointer; border-radius: 40px; }
-        .month-summary-item:hover { background: #e0f0da; }
-        .notification-box { background: rgba(254,241,207,0.9); backdrop-filter: blur(4px); border-radius: 28px; padding: 16px; margin: 20px 0 10px; border-left: 8px solid #f5a623; }
+        .notification-box { background: rgba(254,241,207,0.9); border-radius: 28px; padding: 16px; margin: 20px 0 10px; border-left: 8px solid #f5a623; }
         .notify-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: 12px; }
-        .notify-row input, .notify-row button { width: auto; flex: 1; }
         footer { text-align: center; margin-top: 32px; font-size: 0.7rem; color: #1d3e1a; background: rgba(255,248,220,0.6); border-radius: 30px; padding: 8px; }
         hr { margin: 20px 0; border-color: #bdd4af; }
-        @media (max-width: 550px) { .main-card { padding: 18px; } .stat-badge { font-size: 0.7rem; } }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 100; align-items: center; justify-content: center; }
+        .modal-content { background: #fffef7; border-radius: 40px; padding: 24px; width: 90%; max-width: 350px; }
+        @media (max-width: 550px) { .main-card { padding: 18px; } }
     </style>
 </head>
 <body>
 <div class="main-card">
     <h1>🌿 ಪ್ರಕೃತಿ ಹಣಕಾಸು</h1>
-    <div class="subhead">ಶಾಂತಿಯುತ ಖರ್ಚು ನಿರ್ವಹಣೆ | ವರಮಾನ + ಖರ್ಚು + ರಾತ್ರಿ ನೆನಪು</div>
+    <div class="subhead">ವರಮಾನ + ಖರ್ಚು + ಸಾಲ (ಕೊಟ್ಟ & ವಾಪಸ್) + ರಾತ್ರಿ ನೆನಪು</div>
 
     <!-- ತಿಂಗಳು ಆಯ್ಕೆ -->
     <div class="month-selector">
         <div class="month-nav"><button id="prevMonthBtn">◀ ಹಿಂದಿನ</button><span id="monthDisplay"></span><button id="nextMonthBtn">ಮುಂದಿನ ▶</button></div>
-        <button id="goToCurrentBtn" style="background:#4f7a4e;">📅 ಪ್ರಸ್ತುತ ತಿಂಗಳು</button>
+        <button id="goToCurrentBtn">📅 ಪ್ರಸ್ತುತ ತಿಂಗಳು</button>
     </div>
 
+    <!-- ವರಮಾನ ಕಾರ್ಡ್ -->
     <div class="income-card">
         <div class="income-stats">
             <div class="stat-badge">💰 ವರಮಾನ: <span id="totalIncomeDisplay">₹0</span></div>
@@ -130,7 +105,8 @@
         </div>
     </div>
 
-    <div style="background: rgba(244,249,240,0.9); backdrop-filter: blur(4px); border-radius: 28px; padding: 18px; margin-bottom: 20px;">
+    <!-- ಖರ್ಚು ಫಾರ್ಮ್ -->
+    <div class="expense-card">
         <h3>📝 ಹೊಸ ಖರ್ಚು (ಈ ತಿಂಗಳಿಗೆ)</h3>
         <div class="input-group"><label>ವಿವರಣೆ</label><input type="text" id="expenseDesc" placeholder="ಉದಾ: ತಿಂಡಿ, ಪೆಟ್ರೋಲ್"></div>
         <div class="input-group"><label>ಮೊತ್ತ (₹)</label><input type="number" id="expenseAmount" placeholder="0"></div>
@@ -139,16 +115,36 @@
             <div class="cat-flex">
                 <input list="categoryOptions" id="expenseCategory" placeholder="ದಿನನಿತ್ಯ, ಪ್ರವಾಸ...">
                 <datalist id="categoryOptions"></datalist>
-                <button id="addNewCategoryBtn" style="background:#568f56;">➕ ಹೊಸ ಕ್ಯಾಟೆಗರಿ</button>
+                <button id="addNewCategoryBtn">➕ ಹೊಸ ಕ್ಯಾಟೆಗರಿ</button>
             </div>
         </div>
         <div class="input-group">
             <label>💳 ಪಾವತಿ ವಿಧಾನ</label>
             <div style="display: flex; gap: 20px;"><label><input type="radio" name="payMode" value="UPI" checked> 📱 UPI</label><label><input type="radio" name="payMode" value="Cash"> 💵 ಕ್ಯಾಶ್</label></div>
         </div>
-        <button id="addExpenseBtn" style="background:#2b6e3c;">+ ಖರ್ಚು ಸೇರಿಸು</button>
+        <button id="addExpenseBtn">+ ಖರ್ಚು ಸೇರಿಸು</button>
     </div>
 
+    <!-- 👥 ಸಾಲ ವಿಭಾಗ (ಕೊಟ್ಟ + ವಾಪಸ್) -->
+    <div class="loan-card">
+        <h3>👥 ಸಾಲ (ಕೊಟ್ಟ & ವಾಪಸ್ ಪಡೆದದ್ದು)</h3>
+        <div class="loan-substats">
+            <div class="loan-stats">💰 ಒಟ್ಟು ಕೊಟ್ಟ ಮೊತ್ತ: <span id="totalGiven">₹0</span></div>
+            <div class="loan-stats">📥 ಒಟ್ಟು ವಾಪಸ್ ಪಡೆದದ್ದು: <span id="totalReturned">₹0</span></div>
+            <div class="loan-stats">⚖️ ಬಾಕಿ ಉಳಿದಿದೆ: <span id="totalOutstanding">₹0</span></div>
+        </div>
+        
+        <div class="input-group"><label>👤 ವ್ಯಕ್ತಿಯ ಹೆಸರು</label><input type="text" id="loanPerson" placeholder="ಉದಾ: ರಮೇಶ"></div>
+        <div class="input-group"><label>💰 ಕೊಟ್ಟ ಮೊತ್ತ (₹)</label><input type="number" id="loanAmount" placeholder="0"></div>
+        <div class="input-group"><label>📅 ದಿನಾಂಕ</label><input type="date" id="loanDate" value=""></div>
+        <div class="input-group"><label>📝 ಟಿಪ್ಪಣಿ (ಐಚ್ಛಿಕ)</label><input type="text" id="loanNote" placeholder="ಯಾಕೆ ಕೊಟ್ಟರು?"></div>
+        <button id="addLoanBtn">➕ ಹೊಸ ಸಾಲ ದಾಖಲಿಸು</button>
+
+        <div class="section-title" style="margin-top: 24px;">📋 ಸಾಲದ ಪಟ್ಟಿ (ವ್ಯಕ್ತಿವಾರು)</div>
+        <div id="loanListContainer"></div>
+    </div>
+
+    <!-- ದಿನನಿತ್ಯದ ಖರ್ಚು ಮಿತಿ -->
     <div class="section-title">📆 ದಿನನಿತ್ಯದ ಖರ್ಚು (ಮಿತಿ ₹20,001/ತಿಂಗಳು)</div>
     <div class="progress-bar"><div class="progress-fill" id="dailyProgressFill"></div></div>
     <div id="dailyBudgetWarning" style="font-size:0.8rem; margin-bottom: 12px;"></div>
@@ -157,17 +153,19 @@
     <div class="section-title">✨ ಇತರ ಕ್ಯಾಟೆಗರಿಗಳು</div>
     <ul id="otherExpenseList" class="transaction-list"><li>✨ ಇಲ್ಲ</li></ul>
 
+    <!-- ಇತಿಹಾಸ -->
     <div class="section-title">📜 ಹಿಂದಿನ ತಿಂಗಳುಗಳ ಸಾರಾಂಶ</div>
     <div id="monthSummaryContainer" class="month-summary-list">ಲೋಡ್ ಆಗುತ್ತಿದೆ...</div>
 
+    <!-- ರಾತ್ರಿ ನೆನಪು -->
     <div class="notification-box">
-        <strong>🔔 ರಾತ್ರಿ ನೆನಪಿಸುವಿಕೆ (Daily Reminder)</strong>
+        <strong>🔔 ರಾತ್ರಿ ನೆನಪಿಸುವಿಕೆ</strong>
         <div class="notify-row">
-            <label style="display: flex; align-items: center; gap: 8px;"><input type="checkbox" id="enableNotificationCheckbox"> ಸಕ್ರಿಯಗೊಳಿಸು</label>
-            <label>ಸಮಯ: <input type="time" id="notificationTime" value="21:00" style="width: 110px;"></label>
+            <label><input type="checkbox" id="enableNotificationCheckbox"> ಸಕ್ರಿಯಗೊಳಿಸು</label>
+            <label>ಸಮಯ: <input type="time" id="notificationTime" value="21:00"></label>
             <button id="testNotificationBtn">📢 ಟೆಸ್ಟ್</button>
         </div>
-        <small>ನೋಟಿಫಿಕೇಶನ್‌ಗೆ ಅನುಮತಿ ಕೊಡಿ. ಪ್ರತಿದಿನ ಈ ಸಮಯಕ್ಕೆ ಇಂದಿನ ಖರ್ಚು ಮತ್ತು ಉಳಿದ ಮಿತಿ ತಿಳಿಸುತ್ತದೆ.</small>
+        <small>ನೋಟಿಫಿಕೇಶನ್‌ಗೆ ಅನುಮತಿ ಕೊಡಿ. ಪ್ರತಿದಿನ ಈ ಸಮಯಕ್ಕೆ ಇಂದಿನ ಖರ್ಚು ತಿಳಿಸುತ್ತದೆ.</small>
     </div>
 
     <hr>
@@ -175,301 +173,236 @@
         <button id="resetMonthBtn" style="background:#aa6f6f;">🗑️ ಆಯ್ದ ತಿಂಗಳ ಖರ್ಚು ಅಳಿಸು</button>
         <button id="exportAllBtn" style="background:#568f56;">📎 CSV ಎಕ್ಸ್ಪೋರ್ಟ್</button>
     </div>
-    <footer>🌱 ಪ್ರಕೃತಿಯ ಸ್ಪರ್ಶದಲ್ಲಿ ನಿಮ್ಮ ಹಣಕಾಸು | ಡೇಟಾ ಬ್ರೌಸರ್‍ನಲ್ಲೇ ಸುರಕ್ಷಿತ</footer>
+    <footer>🌱 ಸಾಲದ ಮೇಲೆ "ವಾಪಸ್" ಬಟನ್ ಒತ್ತಿ ಹಿಂಪಡೆದ ಮೊತ್ತ ದಾಖಲಿಸಿ. ಬಾಕಿ ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಲೆಕ್ಕವಾಗುತ್ತದೆ.</footer>
+</div>
+
+<!-- Modal for adding repayment -->
+<div id="repayModal" class="modal">
+    <div class="modal-content">
+        <h3>💰 ವಾಪಸ್ ಪಡೆದ ಮೊತ್ತ ದಾಖಲಿಸಿ</h3>
+        <input type="text" id="repayPersonDisplay" readonly style="background:#e9ecef; margin-bottom: 12px;">
+        <input type="number" id="repayAmount" placeholder="ಮೊತ್ತ (₹)" style="margin-bottom: 12px;">
+        <input type="date" id="repayDate" style="margin-bottom: 12px;">
+        <div style="display: flex; gap: 12px;">
+            <button id="confirmRepayBtn">ಸೇರಿಸು</button>
+            <button id="closeModalBtn">ರದ್ದು</button>
+        </div>
+    </div>
 </div>
 
 <script>
-    // ---------- ಎಲ್ಲಾ ಹಿಂದಿನ ಕಾರ್ಯಚಟುವಟಿಕೆಗಳು (same as before, no changes) ----------
-    const STORAGE_EXPENSES = "history_expense_tracker_expenses";
-    const STORAGE_INCOMES = "history_expense_tracker_incomes";
-    const STORAGE_CATEGORIES = "history_expense_categories_list";
-    const STORAGE_NOTIFY = "daily_notify_settings";
+    // ---------- ಸ್ಟೋರೇಜ್ ಕೀಗಳು ----------
+    const STORAGE_EXPENSES = "nature_expenses";
+    const STORAGE_INCOMES = "nature_incomes";
+    const STORAGE_CATEGORIES = "nature_categories";
+    const STORAGE_LOANS = "nature_loans_advanced";  // { id, person, givenAmount, note, date, repayments: [{amount, date}] }
+    const STORAGE_NOTIFY = "nature_notify";
     
-    let expenses = [];
-    let incomes = [];
-    let customCategories = ["ದಿನನಿತ್ಯ"];
+    let expenses = [], incomes = [], customCategories = ["ದಿನನಿತ್ಯ"];
+    let loans = [];  // each: { id, person, givenAmount, date, note, repayments }
     let selectedMonthKey = "";
     const DAILY_BUDGET = 20001;
-    let notifyEnabled = false;
-    let notifyHour = 21;
-    let notifyMinute = 0;
-    let lastNotificationDate = "";
+    let notifyEnabled = false, notifyHour = 21, notifyMinute = 0, lastNotificationDate = "";
+    let currentRepayLoanId = null;
     
+    // helper
     function getCurrentMonthKey() {
         const now = new Date();
-        const month = (now.getMonth()+1).toString().padStart(2,'0');
-        const year = now.getFullYear();
-        return `${month}-${year}`;
+        return `${(now.getMonth()+1).toString().padStart(2,'0')}-${now.getFullYear()}`;
     }
     
     function loadData() {
-        const storedExp = localStorage.getItem(STORAGE_EXPENSES);
-        expenses = storedExp ? JSON.parse(storedExp) : [];
-        const storedInc = localStorage.getItem(STORAGE_INCOMES);
-        incomes = storedInc ? JSON.parse(storedInc) : [];
-        const storedCats = localStorage.getItem(STORAGE_CATEGORIES);
-        if(storedCats) customCategories = JSON.parse(storedCats);
+        expenses = JSON.parse(localStorage.getItem(STORAGE_EXPENSES) || "[]");
+        incomes = JSON.parse(localStorage.getItem(STORAGE_INCOMES) || "[]");
+        customCategories = JSON.parse(localStorage.getItem(STORAGE_CATEGORIES) || '["ದಿನನಿತ್ಯ"]');
+        let storedLoans = localStorage.getItem(STORAGE_LOANS);
+        if(storedLoans) loans = JSON.parse(storedLoans);
+        else loans = [];
+        // ensure each loan has repayments array
+        loans = loans.map(l => { if(!l.repayments) l.repayments = []; return l; });
         if(!customCategories.includes("ದಿನನಿತ್ಯ")) customCategories.unshift("ದಿನನಿತ್ಯ");
         customCategories = [...new Set(customCategories)];
-        saveCategories();
         if(!selectedMonthKey) selectedMonthKey = getCurrentMonthKey();
         const storedNotify = localStorage.getItem(STORAGE_NOTIFY);
         if(storedNotify) {
             let ns = JSON.parse(storedNotify);
             notifyEnabled = ns.enabled || false;
-            notifyHour = ns.hour !== undefined ? ns.hour : 21;
-            notifyMinute = ns.minute || 0;
-        } else {
-            notifyEnabled = false;
-            notifyHour = 21;
-            notifyMinute = 0;
+            notifyHour = ns.hour ?? 21;
+            notifyMinute = ns.minute ?? 0;
         }
         document.getElementById("enableNotificationCheckbox").checked = notifyEnabled;
         document.getElementById("notificationTime").value = `${notifyHour.toString().padStart(2,'0')}:${notifyMinute.toString().padStart(2,'0')}`;
+        if(document.getElementById("loanDate").value === "") 
+            document.getElementById("loanDate").value = new Date().toISOString().slice(0,10);
     }
-    function saveExpenses() { localStorage.setItem(STORAGE_EXPENSES, JSON.stringify(expenses)); }
-    function saveIncomes() { localStorage.setItem(STORAGE_INCOMES, JSON.stringify(incomes)); }
-    function saveCategories() { localStorage.setItem(STORAGE_CATEGORIES, JSON.stringify(customCategories)); }
-    function saveNotifySettings() {
+    function saveAll() {
+        localStorage.setItem(STORAGE_EXPENSES, JSON.stringify(expenses));
+        localStorage.setItem(STORAGE_INCOMES, JSON.stringify(incomes));
+        localStorage.setItem(STORAGE_CATEGORIES, JSON.stringify(customCategories));
+        localStorage.setItem(STORAGE_LOANS, JSON.stringify(loans));
         localStorage.setItem(STORAGE_NOTIFY, JSON.stringify({enabled: notifyEnabled, hour: notifyHour, minute: notifyMinute}));
     }
-    
-    function getExpensesForMonth(monthKey) { return expenses.filter(e => e.monthKey === monthKey); }
-    function getIncomesForMonth(monthKey) { return incomes.filter(i => i.monthKey === monthKey); }
-    function getTodayExpense() {
-        const todayStr = new Date().toISOString().slice(0,10);
-        const currentMonth = getCurrentMonthKey();
-        const monthExpenses = getExpensesForMonth(currentMonth);
-        return monthExpenses.filter(e => e.date === todayStr).reduce((s,e)=>s+e.amount,0);
-    }
-    function getTodayDailyRemaining() {
-        const currentMonth = getCurrentMonthKey();
-        const dailyTotal = getExpensesForMonth(currentMonth).filter(e=>e.category==="ದಿನನಿತ್ಯ").reduce((s,e)=>s+e.amount,0);
-        return Math.max(0, DAILY_BUDGET - dailyTotal);
+    // loan calculations
+    function getLoanStats() {
+        let totalGiven = 0, totalReturned = 0;
+        loans.forEach(loan => {
+            totalGiven += loan.givenAmount;
+            const returned = loan.repayments.reduce((sum, r) => sum + r.amount, 0);
+            totalReturned += returned;
+        });
+        return { totalGiven, totalReturned, outstanding: totalGiven - totalReturned };
     }
     
-    function sendDailyReminder() {
-        if (!notifyEnabled) return;
-        if (Notification.permission !== "granted") return;
-        const todayExp = getTodayExpense();
-        const remaining = getTodayDailyRemaining();
-        const todayStr = new Date().toISOString().slice(0,10);
-        if (lastNotificationDate === todayStr) return;
-        let message = `ನಿಮ್ಮ ಇಂದಿನ ಒಟ್ಟು ಖರ್ಚು: ₹${todayExp.toFixed(2)}\nದಿನನಿತ್ಯದ ಮಿತಿ ಉಳಿದಿದೆ: ₹${remaining.toFixed(2)}`;
-        if (remaining <= 0) message += `\n⚠️ ಮಿತಿ ಮೀರಿದೆ! ಜಾಗರೂಕರಾಗಿರಿ.`;
-        const notification = new Notification("🌙 ರಾತ್ರಿ ನೆನಪಿಸುವಿಕೆ - ನಿಮ್ಮ ಖರ್ಚು", { body: message });
-        lastNotificationDate = todayStr;
-        setTimeout(() => notification.close(), 8000);
+    function updateLoanUI() {
+        const stats = getLoanStats();
+        document.getElementById("totalGiven").innerText = `₹${stats.totalGiven.toFixed(2)}`;
+        document.getElementById("totalReturned").innerText = `₹${stats.totalReturned.toFixed(2)}`;
+        document.getElementById("totalOutstanding").innerText = `₹${stats.outstanding.toFixed(2)}`;
+        
+        const container = document.getElementById("loanListContainer");
+        if(loans.length === 0) { container.innerHTML = "<p>ಯಾವುದೇ ಸಾಲ ದಾಖಲೆ ಇಲ್ಲ</p>"; return; }
+        container.innerHTML = "";
+        loans.forEach(loan => {
+            const returned = loan.repayments.reduce((s,r)=>s+r.amount,0);
+            const outstanding = loan.givenAmount - returned;
+            const div = document.createElement("div");
+            div.className = "loan-item";
+            div.innerHTML = `
+                <div class="loan-details">
+                    <div class="loan-person">👤 ${escapeHtml(loan.person)}</div>
+                    <div class="loan-meta">📅 ${loan.date} ${loan.note ? `📝 ${escapeHtml(loan.note)}` : ""}</div>
+                    <div><span class="loan-amount">ಕೊಟ್ಟದ್ದು: ₹${loan.givenAmount.toFixed(2)}</span> | 
+                    <span style="color:#2e7d32;">ವಾಪಸ್: ₹${returned.toFixed(2)}</span> | 
+                    <strong>ಬಾಕಿ: ₹${outstanding.toFixed(2)}</strong></div>
+                    <div class="repayment-history">
+                        ${loan.repayments.map(r => `↩️ ${r.date} : ₹${r.amount.toFixed(2)}`).join(' | ') || "ಇನ್ನೂ ಯಾವುದೇ ವಾಪಸ್ ಇಲ್ಲ"}
+                    </div>
+                </div>
+                <div>
+                    <button class="repay-btn" data-id="${loan.id}">💰 ವಾಪಸ್ ಸೇರಿಸು</button>
+                    <button class="delete-btn" data-id="${loan.id}">🗑️</button>
+                </div>
+            `;
+            div.querySelector(".repay-btn").addEventListener("click", () => openRepayModal(loan.id));
+            div.querySelector(".delete-btn").addEventListener("click", () => deleteLoan(loan.id));
+            container.appendChild(div);
+        });
     }
     
-    function testNotification() {
-        if (Notification.permission !== "granted") {
-            Notification.requestPermission().then(perm => {
-                if(perm === "granted") sendDailyReminder();
-                else alert("ನೋಟಿಫಿಕೇಶನ್ ಅನುಮತಿ ಕೊಡಲಿಲ್ಲ.");
-            });
-        } else {
-            new Notification("🔔 ಟೆಸ್ಟ್", { body: `ಪ್ರಯೋಗ: ಇಂದಿನ ಖರ್ಚು ₹${getTodayExpense().toFixed(2)} | ಮಿತಿ ಉಳಿದಿದೆ ₹${getTodayDailyRemaining().toFixed(2)}` });
+    function addLoan() {
+        const person = document.getElementById("loanPerson").value.trim();
+        const amount = parseFloat(document.getElementById("loanAmount").value);
+        const date = document.getElementById("loanDate").value;
+        const note = document.getElementById("loanNote").value.trim();
+        if(!person || isNaN(amount) || amount<=0) { alert("ಹೆಸರು ಮತ್ತು ಸರಿಯಾದ ಮೊತ್ತ ಕೊಡಿ"); return; }
+        const newId = Date.now() + Math.random();
+        loans.push({ id:newId, person, givenAmount:amount, date, note, repayments:[] });
+        saveAll();
+        document.getElementById("loanPerson").value = "";
+        document.getElementById("loanAmount").value = "";
+        document.getElementById("loanNote").value = "";
+        updateLoanUI();
+        alert("ಸಾಲ ದಾಖಲಿಸಲಾಯಿತು.");
+    }
+    
+    function deleteLoan(id) {
+        if(confirm("ಸಾಲದ ದಾಖಲೆಯನ್ನು ಸಂಪೂರ್ಣವಾಗಿ ಅಳಿಸುವಿರಾ?")) {
+            loans = loans.filter(l => l.id !== id);
+            saveAll();
+            updateLoanUI();
         }
     }
     
-    let checkerInterval = null;
-    function startDailyChecker() {
-        if (checkerInterval) clearInterval(checkerInterval);
-        checkerInterval = setInterval(() => {
-            if (!notifyEnabled) return;
-            const now = new Date();
-            if (now.getHours() === notifyHour && now.getMinutes() === notifyMinute && lastNotificationDate !== now.toISOString().slice(0,10)) {
-                sendDailyReminder();
-            }
-        }, 60000);
+    function openRepayModal(loanId) {
+        const loan = loans.find(l => l.id == loanId);
+        if(!loan) return;
+        currentRepayLoanId = loanId;
+        document.getElementById("repayPersonDisplay").value = loan.person;
+        document.getElementById("repayAmount").value = "";
+        document.getElementById("repayDate").value = new Date().toISOString().slice(0,10);
+        document.getElementById("repayModal").style.display = "flex";
     }
+    
+    function addRepayment() {
+        if(!currentRepayLoanId) return;
+        const amount = parseFloat(document.getElementById("repayAmount").value);
+        const date = document.getElementById("repayDate").value;
+        if(isNaN(amount) || amount<=0) { alert("ಸರಿಯಾದ ಮೊತ್ತ ನಮೂದಿಸಿ"); return; }
+        const loan = loans.find(l => l.id == currentRepayLoanId);
+        if(!loan) return;
+        const alreadyReturned = loan.repayments.reduce((s,r)=>s+r.amount,0);
+        if(alreadyReturned + amount > loan.givenAmount) {
+            alert(`ಮೂಲ ಸಾಲ ${loan.givenAmount} ಮೀರಿ ವಾಪಸ್ ದಾಖಲಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ. ಉಳಿದ ಬಾಕಿ: ${(loan.givenAmount - alreadyReturned).toFixed(2)}`);
+            return;
+        }
+        loan.repayments.push({ amount, date });
+        saveAll();
+        updateLoanUI();
+        document.getElementById("repayModal").style.display = "none";
+        alert("ವಾಪಸ್ ಮೊತ್ತ ದಾಖಲಿಸಲಾಗಿದೆ.");
+    }
+    
+    // rest of expense/income functions (same as before, compact)
+    function getExpensesForMonth(mk) { return expenses.filter(e => e.monthKey === mk); }
+    function getIncomesForMonth(mk) { return incomes.filter(i => i.monthKey === mk); }
+    function getTodayExpense() { const today = new Date().toISOString().slice(0,10); const mk = getCurrentMonthKey(); return getExpensesForMonth(mk).filter(e=>e.date===today).reduce((s,e)=>s+e.amount,0); }
+    function getTodayDailyRemaining() { const mk = getCurrentMonthKey(); const dailyTotal = getExpensesForMonth(mk).filter(e=>e.category==="ದಿನನಿತ್ಯ").reduce((s,e)=>s+e.amount,0); return Math.max(0, DAILY_BUDGET - dailyTotal); }
     
     function updateUI() {
-        if(!selectedMonthKey) return;
         document.getElementById("monthDisplay").innerText = selectedMonthKey;
-        const monthExpenses = getExpensesForMonth(selectedMonthKey);
-        const monthIncomes = getIncomesForMonth(selectedMonthKey);
-        const totalIncome = monthIncomes.reduce((s,i)=>s+i.amount,0);
-        const totalExpense = monthExpenses.reduce((s,e)=>s+e.amount,0);
-        const savings = totalIncome - totalExpense;
-        document.getElementById("totalIncomeDisplay").innerHTML = `₹${totalIncome.toFixed(2)}`;
-        document.getElementById("totalExpenseDisplay").innerHTML = `₹${totalExpense.toFixed(2)}`;
+        const monthExp = getExpensesForMonth(selectedMonthKey);
+        const monthInc = getIncomesForMonth(selectedMonthKey);
+        const totalInc = monthInc.reduce((s,i)=>s+i.amount,0);
+        const totalExp = monthExp.reduce((s,e)=>s+e.amount,0);
+        document.getElementById("totalIncomeDisplay").innerHTML = `₹${totalInc.toFixed(2)}`;
+        document.getElementById("totalExpenseDisplay").innerHTML = `₹${totalExp.toFixed(2)}`;
+        const savings = totalInc - totalExp;
         const savingsSpan = document.getElementById("savingsDisplay");
         savingsSpan.innerHTML = `₹${savings.toFixed(2)}`;
-        savingsSpan.style.color = savings >=0 ? "#2e7d32" : "#c0392b";
+        savingsSpan.style.color = savings>=0 ? "#2e7d32" : "#c0392b";
         
-        const dailyExpenses = monthExpenses.filter(e => e.category === "ದಿನನಿತ್ಯ");
-        const dailyTotal = dailyExpenses.reduce((s,e)=>s+e.amount,0);
+        const daily = monthExp.filter(e=>e.category==="ದಿನನಿತ್ಯ");
+        const dailyTotal = daily.reduce((s,e)=>s+e.amount,0);
         const percent = Math.min(100, (dailyTotal/DAILY_BUDGET)*100);
-        const fillBar = document.getElementById("dailyProgressFill");
-        fillBar.style.width = `${percent}%`;
-        fillBar.style.backgroundColor = dailyTotal > DAILY_BUDGET ? "#e67e22" : "#4c9f4a";
-        const warningDiv = document.getElementById("dailyBudgetWarning");
-        if(dailyTotal > DAILY_BUDGET) warningDiv.innerHTML = `<span class="danger-text">⚠️ ಮಿತಿ ದಾಟಿದೆ! ದಿನನಿತ್ಯ ಖರ್ಚು ₹${DAILY_BUDGET} ಮೀರಿದೆ.</span>`;
-        else warningDiv.innerHTML = `✅ ಉಳಿದ ಮಿತಿ: ₹${(DAILY_BUDGET-dailyTotal).toFixed(2)}`;
+        const fill = document.getElementById("dailyProgressFill");
+        fill.style.width = `${percent}%`;
+        fill.style.backgroundColor = dailyTotal > DAILY_BUDGET ? "#e67e22" : "#4c9f4a";
+        const warn = document.getElementById("dailyBudgetWarning");
+        if(dailyTotal > DAILY_BUDGET) warn.innerHTML = `<span class="danger-text">⚠️ ಮಿತಿ ದಾಟಿದೆ! ಉಳಿದ ಮಿತಿ ₹0</span>`;
+        else warn.innerHTML = `✅ ಉಳಿದ ಮಿತಿ: ₹${(DAILY_BUDGET-dailyTotal).toFixed(2)}`;
         
         const dailyList = document.getElementById("dailyExpenseList");
-        if(dailyExpenses.length===0) dailyList.innerHTML = "<li>✖️ ಈ ತಿಂಗಳಲ್ಲಿ ದಿನನಿತ್ಯದ ಖರ್ಚಿಲ್ಲ</li>";
-        else {
-            dailyList.innerHTML = "";
-            dailyExpenses.sort((a,b)=>new Date(b.date)-new Date(a.date)).forEach(txn => {
-                const li = createExpenseItem(txn);
-                if(dailyTotal > DAILY_BUDGET) li.querySelector(".txn-amount")?.classList.add("danger-text");
-                dailyList.appendChild(li);
-            });
-        }
+        if(daily.length===0) dailyList.innerHTML = "<li>✖️ ದಿನನಿತ್ಯದ ಖರ್ಚಿಲ್ಲ</li>";
+        else { dailyList.innerHTML = ""; daily.sort((a,b)=>new Date(b.date)-new Date(a.date)).forEach(t=>dailyList.appendChild(createExpenseItem(t))); if(dailyTotal>DAILY_BUDGET) document.querySelectorAll("#dailyExpenseList .txn-amount").forEach(el=>el.classList.add("danger-text")); }
         
-        const otherExpenses = monthExpenses.filter(e => e.category !== "ದಿನನಿತ್ಯ");
+        const other = monthExp.filter(e=>e.category!=="ದಿನನಿತ್ಯ");
         const otherList = document.getElementById("otherExpenseList");
-        if(otherExpenses.length===0) otherList.innerHTML = "<li>✨ ಬೇರೆ ಕ್ಯಾಟೆಗರಿ ಖರ್ಚು ಇಲ್ಲ</li>";
-        else {
-            otherList.innerHTML = "";
-            otherExpenses.sort((a,b)=>new Date(b.date)-new Date(a.date)).forEach(txn => { otherList.appendChild(createExpenseItem(txn)); });
-        }
+        if(other.length===0) otherList.innerHTML = "<li>✨ ಇತರ ಖರ್ಚು ಇಲ್ಲ</li>";
+        else { otherList.innerHTML = ""; other.sort((a,b)=>new Date(b.date)-new Date(a.date)).forEach(t=>otherList.appendChild(createExpenseItem(t))); }
         
         const datalist = document.getElementById("categoryOptions");
         datalist.innerHTML = "";
-        customCategories.forEach(cat => { let opt = document.createElement("option"); opt.value = cat; datalist.appendChild(opt); });
+        customCategories.forEach(c=>{ let o=document.createElement("option"); o.value=c; datalist.appendChild(o); });
         buildMonthSummary();
+        updateLoanUI();
     }
+    function createExpenseItem(t) { let li=document.createElement("li"); li.className="transaction-item"; li.innerHTML=`<div><div class="txn-desc">${escapeHtml(t.description)}</div><div class="txn-meta">${t.paymentMode==="UPI"?"📱 UPI":"💵 ಕ್ಯಾಶ್"} 📂 ${escapeHtml(t.category)} 📅 ${t.date}</div></div><div><span class="txn-amount">₹${t.amount.toFixed(2)}</span><button class="delete-btn" data-id="${t.id}">🗑️</button></div>`; li.querySelector(".delete-btn").addEventListener("click",()=>{ expenses=expenses.filter(e=>e.id!==t.id); saveAll(); updateUI(); }); return li; }
+    function addIncome() { let d=document.getElementById("incomeDesc").value.trim(), a=parseFloat(document.getElementById("incomeAmount").value); if(!d||isNaN(a)||a<=0) alert("ಸರಿಯಾದ ಮಾಹಿತಿ ಕೊಡಿ"); else { incomes.push({id:Date.now()+Math.random(), date:new Date().toISOString().slice(0,10), description:d, amount:a, monthKey:getCurrentMonthKey()}); saveAll(); document.getElementById("incomeDesc").value=""; document.getElementById("incomeAmount").value=""; if(selectedMonthKey===getCurrentMonthKey()) updateUI(); else alert("ವರಮಾನ ಸೇರಿತು."); } }
+    function addExpense() { let d=document.getElementById("expenseDesc").value.trim(), a=parseFloat(document.getElementById("expenseAmount").value), c=document.getElementById("expenseCategory").value.trim(), pm=document.querySelector('input[name="payMode"]:checked').value; if(!d||isNaN(a)||a<=0) alert("ಸರಿಯಾಗಿ ನಮೂದಿಸಿ"); else { if(c==="") c="ಇತರೆ"; if(!customCategories.includes(c)){ customCategories.push(c); saveAll(); } expenses.push({id:Date.now()+Math.random(), date:new Date().toISOString().slice(0,10), description:d, amount:a, category:c, paymentMode:pm, monthKey:getCurrentMonthKey()}); saveAll(); document.getElementById("expenseDesc").value=""; document.getElementById("expenseAmount").value=""; document.getElementById("expenseCategory").value=""; if(selectedMonthKey===getCurrentMonthKey()) updateUI(); else alert("ಖರ್ಚು ಸೇರಿತು."); } }
+    function addNewCategoryManually() { let nc=document.getElementById("expenseCategory").value.trim(); if(!nc) alert("ಹೆಸರು ಕೊಡಿ"); else if(!customCategories.includes(nc)){ customCategories.push(nc); saveAll(); updateUI(); alert(`"${nc}" ಸೇರಿತು.`); } else alert("ಈಗಾಗಲೇ ಇದೆ."); }
+    function resetCurrentMonthExpenses() { if(confirm(`"${selectedMonthKey}" ಖರ್ಚುಗಳನ್ನು ಅಳಿಸಬೇಕೆ?`)){ expenses=expenses.filter(e=>e.monthKey!==selectedMonthKey); saveAll(); updateUI(); } }
+    function exportCSV() { let rows=[["Type","Date","Description","Amount","Category/Payment","Month"]]; incomes.forEach(i=>rows.push(["Income",i.date,i.description,i.amount,"Income",i.monthKey])); expenses.forEach(e=>rows.push(["Expense",e.date,e.description,e.amount,`${e.category} (${e.paymentMode})`,e.monthKey])); loans.forEach(l=>{ rows.push(["Loan Given",l.date,l.person,l.givenAmount,l.note||"","-"]); l.repayments.forEach(r=>rows.push(["Loan Return",r.date,`Return from ${l.person}`,r.amount,"Repayment","-"])); }); const blob=new Blob([rows.map(r=>r.join(",")).join("\n")],{type:"text/csv"}); const a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download=`finance_${new Date().toISOString().slice(0,10)}.csv`; a.click(); URL.revokeObjectURL(a.href); }
+    function buildMonthSummary() { let months=[...new Set([...expenses.map(e=>e.monthKey),...incomes.map(i=>i.monthKey)])].sort().reverse(); let cont=document.getElementById("monthSummaryContainer"); if(months.length===0) cont.innerHTML="<div>ದಾಖಲೆಗಳಿಲ್ಲ</div>"; else { cont.innerHTML=""; months.forEach(m=>{ let eTot=getExpensesForMonth(m).reduce((s,e)=>s+e.amount,0), iTot=getIncomesForMonth(m).reduce((s,i)=>s+i.amount,0), sv=iTot-eTot; let d=document.createElement("div"); d.className="month-summary-item"; d.innerHTML=`<strong>${m}</strong> <span>💰 ${iTot.toFixed(0)}</span> <span>📉 ${eTot.toFixed(0)}</span> <span style="color:${sv>=0?'#2e7d32':'#c0392b'}">✨ ${sv.toFixed(0)}</span>`; d.addEventListener("click",()=>{ selectedMonthKey=m; updateUI(); }); cont.appendChild(d); }); } }
+    function changeMonth(delta) { let [m,y]=selectedMonthKey.split("-").map(Number); let nd=new Date(y,m-1+delta,1); selectedMonthKey=`${(nd.getMonth()+1).toString().padStart(2,'0')}-${nd.getFullYear()}`; updateUI(); }
+    function goToCurrentMonth() { selectedMonthKey=getCurrentMonthKey(); updateUI(); }
+    function escapeHtml(s) { if(!s) return ""; return s.replace(/[&<>]/g, m=> m==='&'?'&amp;': m==='<'?'&lt;':'&gt;'); }
+    function sendDailyReminder() { if(!notifyEnabled||Notification.permission!=="granted") return; let todayStr=new Date().toISOString().slice(0,10); if(lastNotificationDate===todayStr) return; let msg=`ಇಂದಿನ ಖರ್ಚು: ₹${getTodayExpense().toFixed(2)}\nಮಿತಿ ಉಳಿದಿದೆ: ₹${getTodayDailyRemaining().toFixed(2)}`; new Notification("🌙 ರಾತ್ರಿ ನೆನಪಿಸುವಿಕೆ",{body:msg}); lastNotificationDate=todayStr; }
+    function testNotification() { if(Notification.permission!=="granted") Notification.requestPermission().then(p=>{if(p==="granted") sendDailyReminder(); else alert("ಅನುಮತಿ ಕೊಡಲಿಲ್ಲ");}); else new Notification("🔔 ಟೆಸ್ಟ್",{body:`ಪ್ರಯೋಗ: ಇಂದಿನ ಖರ್ಚು ₹${getTodayExpense().toFixed(2)}`}); }
+    function startDailyChecker() { setInterval(()=>{ if(notifyEnabled){ let n=new Date(); if(n.getHours()===notifyHour && n.getMinutes()===notifyMinute && lastNotificationDate!==n.toISOString().slice(0,10)) sendDailyReminder(); } },60000); }
+    function updateNotifySettings() { notifyEnabled=document.getElementById("enableNotificationCheckbox").checked; let [hh,mm]=document.getElementById("notificationTime").value.split(":").map(Number); notifyHour=hh; notifyMinute=mm; saveAll(); if(notifyEnabled && Notification.permission!=="granted") Notification.requestPermission(); }
     
-    function createExpenseItem(txn) {
-        const li = document.createElement("li");
-        li.className = "transaction-item";
-        li.innerHTML = `<div class="txn-left"><div class="txn-desc">${escapeHtml(txn.description)}</div><div class="txn-meta"><span>${txn.paymentMode === "UPI" ? "📱 UPI" : "💵 ಕ್ಯಾಶ್"}</span><span>📂 ${escapeHtml(txn.category)}</span><span>📅 ${txn.date}</span></div></div><div><span class="txn-amount">₹${txn.amount.toFixed(2)}</span><button class="delete-btn" data-id="${txn.id}">🗑️</button></div>`;
-        li.querySelector(".delete-btn").addEventListener("click", (e) => { e.stopPropagation(); deleteExpense(txn.id); });
-        return li;
-    }
-    
-    function deleteExpense(id) { expenses = expenses.filter(e => e.id !== id); saveExpenses(); updateUI(); }
-    
-    function addIncome() {
-        const desc = document.getElementById("incomeDesc").value.trim();
-        const amount = parseFloat(document.getElementById("incomeAmount").value);
-        if(!desc || isNaN(amount) || amount<=0) { alert("ಸರಿಯಾದ ವರಮಾನ ವಿವರ ಮತ್ತು ಮೊತ್ತ ಕೊಡಿ"); return; }
-        const newId = Date.now() + Math.random();
-        const today = new Date().toISOString().slice(0,10);
-        const monthKey = getCurrentMonthKey();
-        incomes.push({ id:newId, date:today, description:desc, amount:amount, monthKey:monthKey });
-        saveIncomes();
-        document.getElementById("incomeDesc").value = "";
-        document.getElementById("incomeAmount").value = "";
-        if(selectedMonthKey === monthKey) updateUI();
-        else alert(`ವರಮಾನ ${monthKey} ತಿಂಗಳಿಗೆ ಸೇರಿತು.`);
-    }
-    
-    function addExpense() {
-        const desc = document.getElementById("expenseDesc").value.trim();
-        const amount = parseFloat(document.getElementById("expenseAmount").value);
-        let category = document.getElementById("expenseCategory").value.trim();
-        const paymentRadio = document.querySelector('input[name="payMode"]:checked');
-        const paymentMode = paymentRadio ? paymentRadio.value : "UPI";
-        if(!desc || isNaN(amount) || amount<=0) { alert("ವಿವರ ಮತ್ತು ಮೊತ್ತ ಸರಿಯಾಗಿ ನಮೂದಿಸಿ"); return; }
-        if(category === "") category = "ಇತರೆ";
-        if(!customCategories.includes(category)) { customCategories.push(category); saveCategories(); }
-        const newId = Date.now() + Math.random();
-        const today = new Date().toISOString().slice(0,10);
-        const monthKey = getCurrentMonthKey();
-        const newExpense = { id:newId, date:today, description:desc, amount:amount, category:category, paymentMode:paymentMode, monthKey:monthKey };
-        expenses.push(newExpense);
-        saveExpenses();
-        document.getElementById("expenseDesc").value = "";
-        document.getElementById("expenseAmount").value = "";
-        document.getElementById("expenseCategory").value = "";
-        if(selectedMonthKey === monthKey) {
-            updateUI();
-            const dailyTotal = getExpensesForMonth(monthKey).filter(e=>e.category==="ದಿನನಿತ್ಯ").reduce((s,e)=>s+e.amount,0);
-            if(category === "ದಿನನಿತ್ಯ" && dailyTotal > DAILY_BUDGET) alert(`⚠️ ದಿನನಿತ್ಯ ಮಿತಿ ₹${DAILY_BUDGET} ದಾಟಿದೆ!`);
-            else alert("ಖರ್ಚು ಸೇರಿತು.");
-        } else alert(`ಖರ್ಚು ${monthKey} ತಿಂಗಳಿಗೆ ಸೇರಿತು. ತಿಂಗಳು ಬದಲಿಸಿ ನೋಡಿ.`);
-    }
-    
-    function addNewCategoryManually() {
-        const catInput = document.getElementById("expenseCategory");
-        const newCat = catInput.value.trim();
-        if(!newCat) { alert("ಕ್ಯಾಟೆಗರಿ ಹೆಸರು ಬರೆಯಿರಿ"); return; }
-        if(!customCategories.includes(newCat)) { customCategories.push(newCat); saveCategories(); updateUI(); alert(`"${newCat}" ಸೇರಿತು.`); }
-        else alert("ಈಗಾಗಲೇ ಇದೆ.");
-    }
-    
-    function resetCurrentMonthExpenses() {
-        if(!confirm(`"${selectedMonthKey}" ತಿಂಗಳಿನ ಎಲ್ಲಾ ಖರ್ಚುಗಳನ್ನು ಅಳಿಸಬೇಕೆ?`)) return;
-        expenses = expenses.filter(e => e.monthKey !== selectedMonthKey);
-        saveExpenses();
-        updateUI();
-        alert(`${selectedMonthKey} ಖರ್ಚುಗಳನ್ನು ಅಳಿಸಲಾಯಿತು.`);
-    }
-    
-    function exportCSV() {
-        let rows = [["Type","Date","Description","Amount","Category/Payment","Month"]];
-        incomes.forEach(i => rows.push(["Income", i.date, i.description, i.amount, "Income", i.monthKey]));
-        expenses.forEach(e => rows.push(["Expense", e.date, e.description, e.amount, `${e.category} (${e.paymentMode})`, e.monthKey]));
-        const csv = rows.map(r=>r.join(",")).join("\n");
-        const blob = new Blob([csv], {type:"text/csv"});
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = `finance_${new Date().toISOString().slice(0,10)}.csv`;
-        a.click();
-        URL.revokeObjectURL(url);
-    }
-    
-    function buildMonthSummary() {
-        const allMonths = [...new Set([...expenses.map(e=>e.monthKey), ...incomes.map(i=>i.monthKey)])].sort().reverse();
-        const container = document.getElementById("monthSummaryContainer");
-        if(allMonths.length===0) { container.innerHTML = "<div>ದಾಖಲೆಗಳಿಲ್ಲ</div>"; return; }
-        container.innerHTML = "";
-        for(let month of allMonths) {
-            const monthExp = getExpensesForMonth(month).reduce((s,e)=>s+e.amount,0);
-            const monthInc = getIncomesForMonth(month).reduce((s,i)=>s+i.amount,0);
-            const savings = monthInc - monthExp;
-            const div = document.createElement("div");
-            div.className = "month-summary-item";
-            div.innerHTML = `<strong>${month}</strong> <span>💰 ${monthInc.toFixed(0)}</span> <span>📉 ${monthExp.toFixed(0)}</span> <span style="color:${savings>=0?'#2e7d32':'#c0392b'}">✨ ${savings.toFixed(0)}</span>`;
-            div.addEventListener("click", () => { selectedMonthKey = month; updateUI(); });
-            container.appendChild(div);
-        }
-    }
-    
-    function changeMonth(delta) {
-        let [m, y] = selectedMonthKey.split("-").map(Number);
-        let newDate = new Date(y, m-1+delta, 1);
-        let newMonth = (newDate.getMonth()+1).toString().padStart(2,'0');
-        let newYear = newDate.getFullYear();
-        selectedMonthKey = `${newMonth}-${newYear}`;
-        updateUI();
-    }
-    function goToCurrentMonth() { selectedMonthKey = getCurrentMonthKey(); updateUI(); }
-    function escapeHtml(str) { if(!str) return ""; return str.replace(/[&<>]/g, m=> m==='&'?'&amp;': m==='<'?'&lt;':'&gt;'); }
-    
-    function updateNotifySettings() {
-        notifyEnabled = document.getElementById("enableNotificationCheckbox").checked;
-        const timeStr = document.getElementById("notificationTime").value;
-        const [hh, mm] = timeStr.split(":").map(Number);
-        notifyHour = hh;
-        notifyMinute = mm;
-        saveNotifySettings();
-        lastNotificationDate = "";
-        if(notifyEnabled && Notification.permission !== "granted") Notification.requestPermission();
-    }
-    
-    loadData();
-    updateUI();
-    startDailyChecker();
-    if(notifyEnabled && Notification.permission !== "granted") Notification.requestPermission();
-    
-    document.getElementById("addIncomeBtn").addEventListener("click", addIncome);
-    document.getElementById("addExpenseBtn").addEventListener("click", addExpense);
-    document.getElementById("addNewCategoryBtn").addEventListener("click", addNewCategoryManually);
-    document.getElementById("resetMonthBtn").addEventListener("click", resetCurrentMonthExpenses);
-    document.getElementById("exportAllBtn").addEventListener("click", exportCSV);
-    document.getElementById("prevMonthBtn").addEventListener("click", () => changeMonth(-1));
-    document.getElementById("nextMonthBtn").addEventListener("click", () => changeMonth(1));
-    document.getElementById("goToCurrentBtn").addEventListener("click", goToCurrentMonth);
-    document.getElementById("enableNotificationCheckbox").addEventListener("change", updateNotifySettings);
-    document.getElementById("notificationTime").addEventListener("change", updateNotifySettings);
-    document.getElementById("testNotificationBtn").addEventListener("click", testNotification);
+    loadData(); updateUI(); startDailyChecker(); if(notifyEnabled && Notification.permission!=="granted") Notification.requestPermission();
+    document.getElementById("addIncomeBtn").onclick=addIncome; document.getElementById("addExpenseBtn").onclick=addExpense; document.getElementById("addNewCategoryBtn").onclick=addNewCategoryManually; document.getElementById("resetMonthBtn").onclick=resetCurrentMonthExpenses; document.getElementById("exportAllBtn").onclick=exportCSV; document.getElementById("prevMonthBtn").onclick=()=>changeMonth(-1); document.getElementById("nextMonthBtn").onclick=()=>changeMonth(1); document.getElementById("goToCurrentBtn").onclick=goToCurrentMonth; document.getElementById("enableNotificationCheckbox").onchange=updateNotifySettings; document.getElementById("notificationTime").onchange=updateNotifySettings; document.getElementById("testNotificationBtn").onclick=testNotification; document.getElementById("addLoanBtn").onclick=addLoan; document.getElementById("confirmRepayBtn").onclick=addRepayment; document.getElementById("closeModalBtn").onclick=()=>document.getElementById("repayModal").style.display="none"; window.onclick=e=>{if(e.target===document.getElementById("repayModal")) document.getElementById("repayModal").style.display="none";};
 </script>
 </body>
 </html>
