@@ -29,7 +29,7 @@
                 <input type="text" id="setup-mimamsa-text" placeholder="e.g., Arthasangraha">
                 
                 <label>Personal Goal</label>
-                <textarea id="setup-goal" placeholder="What kind of person will you become?"></textarea>
+                <textarea id="setup-goal" placeholder="e.g., Maintain daily Shastra study and computational linguistics progress."></textarea>
                 
                 <button id="btn-start-journey" class="primary-btn">Start 90-Day Journey</button>
             </div>
@@ -40,7 +40,7 @@
             <header class="dashboard-header glass-card">
                 <div class="greeting">
                     <h2 id="greeting-text">ಶುಭಪ್ರಭಾತ 🙏</h2>
-                    <p id="day-counter" class="day-counter">Day <span id="current-day">1</span> of 90</p>
+                    <p class="day-counter" id="day-counter-display">Day <span id="current-day">1</span> of 90</p>
                 </div>
                 <div id="motivational-message" class="motivational-quote"></div>
                 <div id="recovery-message" class="recovery-indicator hidden"></div>
@@ -52,8 +52,8 @@
                     <span class="stat-label">Day Streak 🔥</span>
                 </div>
                 <div class="stat-card glass-card">
-                    <span class="stat-value" id="habits-completed">0/0</span>
-                    <span class="stat-label">Habits Today</span>
+                    <span class="stat-value" id="consistency-7d">0%</span>
+                    <span class="stat-label">7-Day Consistency</span>
                 </div>
             </div>
 
@@ -62,8 +62,10 @@
                     <input type="checkbox" id="busy-day-toggle">
                     <span class="slider"></span>
                 </label>
-                <span>Busy Day Mode <small>(Protects minimum essential habits)</small></span>
+                <span id="busy-day-label">Busy Day Mode</span>
             </div>
+            
+            <div id="day-status-indicator" class="status-badge hidden"></div>
 
             <div id="habits-container" class="habits-list">
                 <!-- Habits injected via JavaScript -->
@@ -72,10 +74,97 @@
             <button id="btn-save-day" class="primary-btn mt-2">Save Today's Progress</button>
         </section>
 
+        <!-- Study Center -->
+        <section id="study-screen" class="screen hidden">
+            <div class="glass-card">
+                <h2>📚 Study Center</h2>
+            </div>
+            
+            <div class="study-card glass-card">
+                <h3>Baudhāyanīya Prayoga</h3>
+                <div class="stats-row mt-2">
+                    <div class="stat-card"><span class="stat-value" id="stat-prayoga-total">0</span><span class="stat-label">Total Mins</span></div>
+                    <div class="stat-card"><span class="stat-value" id="stat-prayoga-days">0</span><span class="stat-label">Days Studied</span></div>
+                </div>
+            </div>
+
+            <div class="study-card glass-card">
+                <h3 id="display-nyaya-title">Nyaya Shastra</h3>
+                <div class="stats-row mt-2">
+                    <div class="stat-card"><span class="stat-value" id="stat-nyaya-total">0</span><span class="stat-label">Total Pages</span></div>
+                    <div class="stat-card"><span class="stat-value" id="stat-nyaya-days">0</span><span class="stat-label">Days Studied</span></div>
+                </div>
+            </div>
+
+            <div class="study-card glass-card">
+                <h3 id="display-mimamsa-title">Mimamsa Shastra</h3>
+                <div class="stats-row mt-2">
+                    <div class="stat-card"><span class="stat-value" id="stat-mimamsa-total">0</span><span class="stat-label">Total Pages</span></div>
+                    <div class="stat-card"><span class="stat-value" id="stat-mimamsa-days">0</span><span class="stat-label">Days Studied</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Learning Journal -->
+        <section id="journal-screen" class="screen hidden">
+            <div class="glass-card">
+                <h2>🧠 Learning Journal</h2>
+                <input type="text" id="journal-topic" placeholder="Topic (e.g., Sanskrit NLP, Architecture)">
+                <textarea id="journal-desc" rows="3" placeholder="What did I learn today?"></textarea>
+                <div style="display: flex; gap: 8px;">
+                    <input type="text" id="journal-source" placeholder="Source (Optional)" style="flex: 2;">
+                    <input type="number" id="journal-time" placeholder="Mins" style="flex: 1;">
+                </div>
+                <button id="btn-save-journal" class="primary-btn mt-2">Save Entry</button>
+            </div>
+            <div id="journal-feed" class="mt-2"></div>
+        </section>
+        
+        <!-- Reviews Screen -->
+        <section id="review-screen" class="screen hidden">
+            <div id="review-prompt-container" class="glass-card hidden">
+                <h2 id="review-title">Weekly Review</h2>
+                <p id="review-subtitle">Week 1 summary</p>
+                <div class="stats-row mt-2 mb-2" id="review-stats"></div>
+                <textarea id="review-went-well" rows="2" placeholder="What went well?"></textarea>
+                <textarea id="review-improve" rows="2" placeholder="What needs improvement?"></textarea>
+                <textarea id="review-focus" rows="2" placeholder="Next focus?"></textarea>
+                <button id="btn-save-review" class="primary-btn mt-2">Save Review</button>
+            </div>
+            <div id="review-history-feed"></div>
+        </section>
+
+        <!-- Settings & Data -->
+        <section id="settings-screen" class="screen hidden">
+            <div class="glass-card">
+                <h2>📅 90-Day Calendar</h2>
+                <div id="calendar-heatmap" class="calendar-grid"></div>
+                <div class="legend mt-2">
+                    <span><span style="color:var(--success-color)">■</span> Full</span>
+                    <span><span style="color:var(--accent-color)">■</span> Min/Part</span>
+                    <span><span style="color:var(--danger-color)">■</span> Missed</span>
+                </div>
+            </div>
+            
+            <div class="glass-card">
+                <h2>⚙️ Data Management</h2>
+                <button id="btn-export" class="primary-btn mt-2">📤 Export Data (JSON)</button>
+                <div class="import-section mt-2">
+                    <input type="file" id="import-file" accept=".json" style="width: 100%; margin-bottom: 8px;">
+                    <button id="btn-import" class="primary-btn" style="background: var(--text-secondary);">📥 Import Data</button>
+                </div>
+                <div class="mt-2" style="border-top: 1px solid rgba(0,0,0,0.1); padding-top: 16px;">
+                    <button id="btn-reset" class="danger-btn">⚠️ Reset All Data</button>
+                </div>
+            </div>
+        </section>
+
         <!-- Navigation -->
         <nav class="bottom-nav glass-card">
             <button class="nav-btn active" data-target="dashboard-screen">Daily</button>
             <button class="nav-btn" data-target="study-screen">Study</button>
+            <button class="nav-btn" data-target="journal-screen">Journal</button>
+            <button class="nav-btn" data-target="review-screen">Review</button>
             <button class="nav-btn" data-target="settings-screen">Settings</button>
         </nav>
     </div>
